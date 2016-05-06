@@ -6,17 +6,17 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 10:24:59 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 19:35:27 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/06 20:05:45 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-void	printenv(void)
+void	printenv(t_list * aim)
 {
 	t_list	*node;
 
-	node = g_envi;
+	node = aim;
 	while (node)
 	{
 		ft_putendl(ft_ptrf("%s=%s", node->name, node->value));
@@ -28,35 +28,24 @@ void	ft_env(char **args)
 {
 	int		i;
 	int		ret;
-	t_list	*mirror;
-	t_list	*cpy;
+//	t_list	*mirror;
 
 	i = 0;
-	mirror = NULL;
+//	mirror = cpy_list(g_envi, &env_node);
 	while (args[i] && (ret = ft_get_char(args[i], '=')) != -1)
 	{
 		args[i][ret] = '\0';
-		new_in_list(args[i] + ret + 1, &mirror, &classic_node);
 		ft_set(args[i], args[i] + ret + 1, 1);
 		i++;
 	}
-	if (args[i])
-	{
-		get_home(args + i);
-		route_me(args + i);
-	}
+	if (!args[i])
+		printenv(g_envi);
 	else
-		printenv();
-	cpy = mirror;
-	i = 0;
-	while (cpy)//pb efface if binaire fork
 	{
-		printf("%s\n", cpy->name);
-		ft_set(args[i], cpy->name, 1);
-		cpy = cpy->next;
-		i++;
+//		get_home(args + i, mirror);
+//		route_me(args + i, mirror);
 	}
-//	ft_dellist(&mirror);
+
 }
 
 void	ft_setenv(char **args)

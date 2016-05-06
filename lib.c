@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:44:29 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 17:18:12 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/06 20:04:03 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ char	*ft_getenv(char *env, int flag)
 		cur = cur->next;
 	}
 	return (NULL);
+}
+
+t_list	*cpy_list(t_list *src, t_list *(*f)(char *))
+{
+	t_list	*out;
+	t_list	*cur;
+	char	*tmp;
+
+	cur = src;
+	while (cur)
+	{
+		tmp = ft_ptrf("%s=%s", cur->name, cur->value);
+		new_in_list(tmp, &out, f);
+		free(tmp);
+		cur = cur->next;
+	}
+	return (out);
+	
 }
 
 void	ft_dellist(t_list **list)
