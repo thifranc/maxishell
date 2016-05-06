@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 10:24:59 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 19:01:52 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/06 19:35:27 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,15 @@ void	ft_env(char **args)
 {
 	int		i;
 	int		ret;
+	t_list	*mirror;
+	t_list	*cpy;
 
 	i = 0;
+	mirror = NULL;
 	while (args[i] && (ret = ft_get_char(args[i], '=')) != -1)
 	{
 		args[i][ret] = '\0';
+		new_in_list(args[i] + ret + 1, &mirror, &classic_node);
 		ft_set(args[i], args[i] + ret + 1, 1);
 		i++;
 	}
@@ -43,8 +47,16 @@ void	ft_env(char **args)
 	}
 	else
 		printenv();
-	while (--i > 0)//pb efface if binaire fork
-		ft_unset(args[i]);
+	cpy = mirror;
+	i = 0;
+	while (cpy)//pb efface if binaire fork
+	{
+		printf("%s\n", cpy->name);
+		ft_set(args[i], cpy->name, 1);
+		cpy = cpy->next;
+		i++;
+	}
+//	ft_dellist(&mirror);
 }
 
 void	ft_setenv(char **args)
