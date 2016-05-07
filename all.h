@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 10:58:40 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:10:00 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:37:50 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int					fork_me(char *path, char **args, t_list *aim);
 void				ft_set(char *name, char *value, int crash, t_list *aim);
 void				ft_unset(char *env, t_list *aim);
 
-void				ft_env(char **args);
-void				ft_exit(char **args);
-void				ft_pwd(char **args);
-void				ft_cd(char **args);
-void				ft_clear(char **args);
-void				ft_setenv(char **args);
-void				ft_unsetenv(char **args);
+void				ft_env(char **args, t_list *env);
+void				ft_exit(char **args, t_list *env);
+void				ft_pwd(char **args, t_list *env);
+void				ft_cd(char **args, t_list *env);
+void				ft_clear(char **args, t_list *env);
+void				ft_setenv(char **args, t_list *env);
+void				ft_unsetenv(char **args, t_list *env);
 
 void				ft_dellist(t_list **list);
 t_list				*cpy_list(t_list *list, t_list *(*f)(char *data));

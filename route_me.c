@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 11:21:05 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:07:07 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:40:22 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	error(char *cmd, int flag)
 	}
 }
 
-void	inception(char **args)
+void	inception(char **args, t_list *env)
 {
 	pid_t	father;
 
-	if (args[0])
+	if (args[0] || !env)
 		return (error(NULL, 0));
 	else
 	{
@@ -101,7 +101,7 @@ void	route_me(char **args, t_list *aim)
 	static char	*builtin[] =
 	{"cd", "env", "setenv", "unsetenv", "exit", "minishell",
 		"clear"};
-	static void	(*f[8])(char **args) =
+	static void	(*f[8])(char **args, t_list *aim) =
 	{ft_cd, ft_env, ft_setenv, ft_unsetenv, ft_exit, inception,
 		ft_clear};
 
@@ -114,7 +114,7 @@ void	route_me(char **args, t_list *aim)
 	while (builtin[i] && ft_strcmp(builtin[i], args[0]))
 		i++;
 	if (builtin[i])
-		f[i](args + 1);
+		f[i](args + 1, aim);
 	else
 	{
 		if (!ft_strncmp("./", args[0], 2) && !fork_me(args[0], args, aim))
