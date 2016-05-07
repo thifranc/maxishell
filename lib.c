@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:44:29 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:08:55 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 11:53:43 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_list	*cpy_list(t_list *src, t_list *(*f)(char *))
 	char	*tmp;
 
 	cur = src;
+	out = NULL;
 	while (cur)
 	{
 		tmp = ft_ptrf("%s=%s", cur->name, cur->value);

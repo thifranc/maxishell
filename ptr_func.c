@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 10:24:59 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 11:09:11 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 11:53:32 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,11 @@ void	ft_env(char **args, t_list *env)
 	int		i;
 	int		ret;
 	t_list	*mirror;
-//pb segfault
+
 	i = 0;
-	dprintf(1, "lol1\n");
 	mirror = cpy_list(env, &env_node);
-	dprintf(1, "lol1\n");
 	while (args[i] && (ret = ft_get_char(args[i], '=')) != -1)
 	{
-	dprintf(1, "lol1\n");
 		args[i][ret] = '\0';
 		ft_set(args[i], args[i] + ret + 1, 1, mirror);
 		i++;
