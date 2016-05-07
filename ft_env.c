@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 14:07:18 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 14:45:46 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:52:12 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_env(char **args, t_list *env)
 		}
 		i++;
 	}
-	if (!args[i])
+	if (!args[i])//always true
 		printenv(mirror);
 	else
 	{
