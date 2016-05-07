@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 10:58:40 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:37:50 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 12:49:59 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void				ft_setenv(char **args, t_list *env);
 void				ft_unsetenv(char **args, t_list *env);
 
 void				ft_dellist(t_list **list);
+void				del_node(t_list **list);
 t_list				*cpy_list(t_list *list, t_list *(*f)(char *data));
 void				get_home(char **tab, t_list *aim);
 char				**make_tab(t_list *list);

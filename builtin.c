@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:15:20 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:40:23 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 13:22:51 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ void	ft_unset(char *env, t_list *aim)
 {
 	t_list	*node;
 	t_list	*tmp;
+	int		ct;
 
 	node = aim;
 	tmp = node;
+	ct = 0;
 	while (node && ft_strcmp(node->name, env))
 	{
 		tmp = node;
 		node = node->next;
+		ct++;
 	}
 	if (!node)
 		ft_putstr(ft_ptrf("Var [%s] does not exist.\n", env));
@@ -30,8 +33,15 @@ void	ft_unset(char *env, t_list *aim)
 	{
 		if (!ft_strcmp(env, "PATH"))
 			g_bin = NULL;
-		tmp->next = node->next;
-		//ft_memdel((void**)&node); double free des fois
+		if (!ct)
+		{
+			tmp = cpy_list(g_envi, &env_node);
+			ft_dellist(&g_envi);
+			g_envi = tmp->next;;
+			del_node(&tmp);
+		}
+		else
+			tmp->next = node->next;
 	}
 }
 
@@ -75,6 +85,8 @@ void	ft_set(char *name, char *value, int crash, t_list *aim)
 	}
 	else
 		ft_putendl("var already exists. Use option crash in need");
+	if (!ft_strcmp(name, "PATH"))
+		g_bin = list_binaries();
 }
 
 void	ft_exit(char **args, t_list *env)

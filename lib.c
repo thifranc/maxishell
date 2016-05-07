@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:44:29 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 11:53:43 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 13:22:49 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,20 @@ t_list	*cpy_list(t_list *src, t_list *(*f)(char *))
 	
 }
 
+void	del_node(t_list **list)
+{
+	free((*list)->name);
+	free((*list)->value);
+	free((*list)->next);
+	free(*list);
+}
+
 void	ft_dellist(t_list **list)
 {
 	if (*list)
 	{
 		ft_dellist(&(*list)->next);
-		free((*list)->name);
-		free((*list)->value);
-		free((*list)->next);
-		free(*list);
+		del_node(&(*list));
 		*list = NULL;
 	}
 }
