@@ -6,19 +6,11 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:44:29 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 13:22:49 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:03:59 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
-
-int		list_size(t_list *list)
-{
-	if (!list)
-		return (0);
-	else
-		return (1 + list_size(list->next));
-}
 
 char	*ft_getenv(char *env, int flag, t_list *aim)
 {
@@ -52,25 +44,6 @@ t_list	*cpy_list(t_list *src, t_list *(*f)(char *))
 		cur = cur->next;
 	}
 	return (out);
-	
-}
-
-void	del_node(t_list **list)
-{
-	free((*list)->name);
-	free((*list)->value);
-	free((*list)->next);
-	free(*list);
-}
-
-void	ft_dellist(t_list **list)
-{
-	if (*list)
-	{
-		ft_dellist(&(*list)->next);
-		del_node(&(*list));
-		*list = NULL;
-	}
 }
 
 char	**make_tab(t_list *list)

@@ -6,13 +6,13 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 10:24:59 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 11:53:32 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:29:42 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-void	printenv(t_list * aim)
+void	printenv(t_list *aim)
 {
 	t_list	*node;
 
@@ -22,30 +22,6 @@ void	printenv(t_list * aim)
 		ft_putendl(ft_ptrf("%s=%s", node->name, node->value));
 		node = node->next;
 	}
-}
-
-void	ft_env(char **args, t_list *env)
-{
-	int		i;
-	int		ret;
-	t_list	*mirror;
-
-	i = 0;
-	mirror = cpy_list(env, &env_node);
-	while (args[i] && (ret = ft_get_char(args[i], '=')) != -1)
-	{
-		args[i][ret] = '\0';
-		ft_set(args[i], args[i] + ret + 1, 1, mirror);
-		i++;
-	}
-	if (!args[i])
-		printenv(mirror);
-	else
-	{
-		get_home(args + i, mirror);
-		route_me(args + i, mirror);
-	}
-	ft_dellist(&mirror);
 }
 
 void	ft_setenv(char **args, t_list *env)
@@ -73,7 +49,7 @@ void	ft_unsetenv(char **args, t_list *env)
 
 void	ft_clear(char **args, t_list *env)
 {
-	if (args[0] || !env)
+	if (args[0] && (env || !env))
 		return (error(NULL, 0));
 	else
 		ft_putstr("\033[H\033[2J");

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:15:20 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 13:22:51 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:39:27 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,7 @@ void	ft_unset(char *env, t_list *aim)
 		if (!ft_strcmp(env, "PATH"))
 			g_bin = NULL;
 		if (!ct)
-		{
-			tmp = cpy_list(g_envi, &env_node);
-			ft_dellist(&g_envi);
-			g_envi = tmp->next;;
-			del_node(&tmp);
-		}
+			g_envi = cpy_list(g_envi->next, &env_node);
 		else
 			tmp->next = node->next;
 	}

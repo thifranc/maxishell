@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 10:58:40 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 12:49:59 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 14:28:21 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <sys/syslimits.h>
 # include <sys/stat.h>
 # include "libft/libft.h"
+
+# define U_OPT 4
+# define I_OPT 2
+# define H_OPT 1
 
 typedef struct		s_list
 {
@@ -72,7 +76,8 @@ void				error(char *cmd, int flag);
 char				*ft_getenv(char *env, int flag, t_list *aim);
 t_list				*ft_wrd_match(char *word, t_list **list);
 
-//debug func
+void				printenv(t_list *aim);
 void				print_list(t_list *list, int flag);
 void				print_tab(char **lol);
+int					list_size(t_list *list);
 #endif

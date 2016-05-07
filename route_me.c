@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 11:21:05 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 11:53:40 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 13:25:32 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		fork_me(char *path, char **args, t_list *aim)
 		wait(&father);
 	else
 	{
-		env = make_tab(aim);//cpy env but no always the same
+		env = make_tab(aim);
 		execve(path, args, env);
 		ft_deltab((void**)env);
 	}
