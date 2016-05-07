@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 11:21:05 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 20:01:35 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:07:07 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	inception(char **args)
 	}
 }
 
-int		fork_me(char *path, char **args)
+int		fork_me(char *path, char **args, t_list *aim)
 {
 	pid_t	father;
 	char	**env;
@@ -70,24 +70,24 @@ int		fork_me(char *path, char **args)
 		wait(&father);
 	else
 	{
-		env = make_tab(g_envi);//cpy env but no always the same
+		env = make_tab(aim);//cpy env but no always the same
 		execve(path, args, env);
 		ft_deltab((void**)env);
 	}
 	return (1);
 }
 
-void	exec_binary(char **args)
+void	exec_binary(char **args, t_list *aim)
 {
 	t_list	*tmp;
 
 	tmp = g_bin;
-	if (args[0][0] == '/' && fork_me(args[0], args))
+	if (args[0][0] == '/' && fork_me(args[0], args, aim))
 		return ;
 	while (tmp)
 	{
 		if (!ft_strcmp(args[0], (char*)tmp->name) &&
-				fork_me(tmp->value, args))
+				fork_me(tmp->value, args, aim))
 			return ;
 		tmp = tmp->next;
 	}
@@ -95,7 +95,7 @@ void	exec_binary(char **args)
 		return (error(args[0], 1));
 }
 
-void	route_me(char **args)
+void	route_me(char **args, t_list *aim)
 {
 	int			i;
 	static char	*builtin[] =
@@ -117,9 +117,9 @@ void	route_me(char **args)
 		f[i](args + 1);
 	else
 	{
-		if (!ft_strncmp("./", args[0], 2) && !fork_me(args[0], args))
+		if (!ft_strncmp("./", args[0], 2) && !fork_me(args[0], args, aim))
 			return ;
 		else if (ft_strncmp("./", args[0], 2))
-			exec_binary(args);
+			exec_binary(args, aim);
 	}
 }

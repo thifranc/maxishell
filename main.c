@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:22:14 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 20:04:30 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:00:18 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		wk_dir(void)
 	return (1);
 }
 
-void	get_home(char **tab)
+void	get_home(char **tab, t_list *aim)
 {
 	int		i;
 	char	*tmp;
@@ -46,14 +46,14 @@ void	get_home(char **tab)
 		{
 			tmp = ft_strdup(tab[i]);
 			free(tab[i]);
-			tab[i] = ft_ptrf("%s/%s", ft_getenv("HOME", 0), tmp + 2);
+			tab[i] = ft_ptrf("%s/%s", ft_getenv("HOME", 0, aim), tmp + 2);
 			free(tmp);
 		}
 		i++;
 	}
 }
 
-void	do_cmd(void)
+void	do_cmd(t_list *aim)
 {
 	char	**tmp;
 	char	*epur;
@@ -70,8 +70,8 @@ void	do_cmd(void)
 			i++;
 		}
 		tmp = ft_strsplit((char*)(g_cmd_list)->name, ' ');
-		get_home(tmp);
-		route_me(tmp);
+		get_home(tmp, aim);
+		route_me(tmp, aim);
 		g_cmd_list = (g_cmd_list)->next;
 		ft_deltab((void**)tmp);
 	}
@@ -111,7 +111,7 @@ int		main(int ac, char **av, char **env)
 		ft_memdel((void**)&line);
 		g_cmd_list = get_cmd(tmp);
 		ft_deltab((void**)tmp);
-		do_cmd();
+		do_cmd(g_envi);
 	}
 	return (0);
 }

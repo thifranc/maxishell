@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 15:44:29 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 20:04:03 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:08:55 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int		list_size(t_list *list)
 		return (1 + list_size(list->next));
 }
 
-char	*ft_getenv(char *env, int flag)
+char	*ft_getenv(char *env, int flag, t_list *aim)
 {
 	t_list	*cur;
 
-	cur = g_envi;
+	cur = aim;
 	while (cur)
 	{
 		if (flag && !ft_strcmp(env, cur->name))

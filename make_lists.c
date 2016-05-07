@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 18:56:47 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 18:57:33 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:04:03 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_list	*list_binaries(void)
 	i = 0;
 	paths = NULL;
 	list = NULL;
-	if ((path = ft_getenv("PATH", 1)) == NULL)
+	if ((path = ft_getenv("PATH", 1, g_envi)) == NULL)
 		return (NULL);
 	path += ft_get_char(path, '=') + 1;
 	paths = ft_strsplit(path, ':');

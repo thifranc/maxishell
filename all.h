@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 10:58:40 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 20:04:29 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:10:00 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ t_list				*classic_node(char *data);
 
 int					wk_dir(void);
 void				ft_write_fd(char *msg, int fd);
-void				do_cmd(void);
+void				do_cmd(t_list *aim);
 t_list				*get_cmd(char **tmp);
 
-void				route_me(char **args);
+void				route_me(char **args, t_list *aim);
 
-void				exec_binary(char **args);
-int					fork_me(char *path, char **args);
+void				exec_binary(char **args, t_list *aim);
+int					fork_me(char *path, char **args, t_list *aim);
 
-void				ft_set(char *name, char *value, int crash);
-void				ft_unset(char *env);
+void				ft_set(char *name, char *value, int crash, t_list *aim);
+void				ft_unset(char *env, t_list *aim);
 
 void				ft_env(char **args);
 void				ft_exit(char **args);
@@ -64,10 +64,11 @@ void				ft_setenv(char **args);
 void				ft_unsetenv(char **args);
 
 void				ft_dellist(t_list **list);
-void				get_home(char **tab);
+t_list				*cpy_list(t_list *list, t_list *(*f)(char *data));
+void				get_home(char **tab, t_list *aim);
 char				**make_tab(t_list *list);
 void				error(char *cmd, int flag);
-char				*ft_getenv(char *env, int flag);
+char				*ft_getenv(char *env, int flag, t_list *aim);
 t_list				*ft_wrd_match(char *word, t_list **list);
 
 //debug func

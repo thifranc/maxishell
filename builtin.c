@@ -6,18 +6,18 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:15:20 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/06 20:06:12 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 10:07:27 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-void	ft_unset(char *env)
+void	ft_unset(char *env, t_list *aim)
 {
 	t_list	*node;
 	t_list	*tmp;
 
-	node = g_envi;
+	node = aim;
 	tmp = node;
 	while (node && ft_strcmp(node->name, env))
 	{
@@ -41,13 +41,13 @@ void	ft_cd(char **args)
 	char	cur[PATH_MAX];
 
 	if (!args[0])
-		goal = ft_getenv("HOME", 0);
+		goal = ft_getenv("HOME", 0, g_envi);
 	else if (args[1])
 		return (error(args[1], 3));
 	else if (args[0][0] == '~')
-		goal = ft_ptrf("%s/%s", ft_getenv("HOME", 0), args[0] + 1);
+		goal = ft_ptrf("%s/%s", ft_getenv("HOME", 0, g_envi), args[0] + 1);
 	else if (!ft_strcmp(args[0], "-"))
-		goal = ft_getenv("OLDPWD", 0);
+		goal = ft_getenv("OLDPWD", 0, g_envi);
 	else
 		goal = args[0];
 	if (access(goal, F_OK) == -1)
@@ -56,18 +56,18 @@ void	ft_cd(char **args)
 		ft_putstr("Permission denied\n");
 	if (access(goal, F_OK) == -1 || access(goal, X_OK) == -1)
 		return ;
-	ft_set("OLDPWD", getcwd(cur, PATH_MAX), 1);
+	ft_set("OLDPWD", getcwd(cur, PATH_MAX), 1, g_envi);
 	chdir(goal);
-	ft_set("PWD", getcwd(cur, PATH_MAX), 1);
+	ft_set("PWD", getcwd(cur, PATH_MAX), 1, g_envi);
 }
 
-void	ft_set(char *name, char *value, int crash)
+void	ft_set(char *name, char *value, int crash, t_list *aim)
 {
 	t_list	*node;
 
-	node = ft_wrd_match(name, &g_envi);
+	node = ft_wrd_match(name, &aim);
 	if (!node)
-		new_in_list(ft_ptrf("%s=%s", name, value), &g_envi, &env_node);
+		new_in_list(ft_ptrf("%s=%s", name, value), &aim, &env_node);
 	else if (node && crash)
 	{
 		free(node->value);
