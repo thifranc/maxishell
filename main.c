@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:22:14 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:00:18 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 11:10:29 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	do_cmd(t_list *aim)
 			i++;
 		}
 		tmp = ft_strsplit((char*)(g_cmd_list)->name, ' ');
-		get_home(tmp, aim);
+		if (tmp[0] && ft_strcmp(tmp[0], "env"))
+			get_home(tmp, aim);
 		route_me(tmp, aim);
 		g_cmd_list = (g_cmd_list)->next;
 		ft_deltab((void**)tmp);

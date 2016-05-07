@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 10:24:59 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 10:40:24 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/07 11:09:11 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,24 @@ void	ft_env(char **args, t_list *env)
 	t_list	*mirror;
 //pb segfault
 	i = 0;
-//	dprintf(1, "lndr\n");
+	dprintf(1, "lol1\n");
 	mirror = cpy_list(env, &env_node);
-//	dprintf(1, "tg\n");
+	dprintf(1, "lol1\n");
 	while (args[i] && (ret = ft_get_char(args[i], '=')) != -1)
 	{
-//	dprintf(1, "lol1\n");
+	dprintf(1, "lol1\n");
 		args[i][ret] = '\0';
-	dprintf(1, "lol2\n");
 		ft_set(args[i], args[i] + ret + 1, 1, mirror);
-	dprintf(1, "lol3\n");
 		i++;
 	}
-	dprintf(1, "lol4\n");
 	if (!args[i])
 		printenv(mirror);
 	else
 	{
-	dprintf(1, "lol5\n");
 		get_home(args + i, mirror);
-	dprintf(1, "lol6\n");
 		route_me(args + i, mirror);
-	dprintf(1, "lol7\n");
 	}
-	dprintf(1, "lol8\n");
 	ft_dellist(&mirror);
-	dprintf(1, "lol9\n");
 }
 
 void	ft_setenv(char **args, t_list *env)
