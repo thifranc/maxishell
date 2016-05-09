@@ -6,61 +6,47 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 14:07:18 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 14:52:12 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 13:34:12 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-int		get_opt(char **args, int *i)
+t_list	*update_env(char **args, t_list *aim, int *i)
 {
-	int		k;
-	int		opt;
+	int		ret;
 
-	opt = 0;
-	while (args[*i] && args[*i][0] == '-')
+	*i = 0;
+	while (args[*i] && ((!ft_strcmp("-u", args[*i]))
+		|| !ft_strcmp("--unset", args[*i]) || ft_get_char(args[*i], '=') != -1
+			|| !ft_strcmp("-i", args[*i])))
 	{
-		k = 1;
-		while (ft_get_char("uih", args[*i][k]) != -1)
+		if (!ft_strcmp("-u", args[*i]) || !ft_strcmp("--unset", args[*i]))
+			ft_unset(args[++(*i)], aim);
+		if ((ret = ft_get_char(args[*i], '=')) != -1)
 		{
-			if (args[*i][k] == 'i')
-				opt |= I_OPT;
-			if (args[*i][k] == 'u')
-				opt |= U_OPT;
-			if (args[*i][k] == 'h')
-				opt |= H_OPT;
-			k++;
+			args[*i][ret] = '\0';
+			ft_set(args[*i], args[*i] + ret + 1, 1, aim);
 		}
 		(*i)++;
 	}
-	return (opt);
+	return (aim);
 }
 
 void	ft_env(char **args, t_list *env)
 {
 	int		i;
-	int		ret;
-	int		opt;
 	t_list	*mirror;
 
 	i = 0;
-	opt = get_opt(args, &i);
-	if (opt & I_OPT)
-		mirror = NULL;
-	else
-		mirror = cpy_list(env, &env_node);
-	while (args[i])
-	{
-		if (opt & U_OPT)
-			ft_unset(args[i], mirror);
-		else if ((ret = ft_get_char(args[i], '=')) != -1)
-		{
-			args[i][ret] = '\0';
-			ft_set(args[i], args[i] + ret + 1, 1, mirror);
-		}
+	while (args[i] && ft_strcmp(args[i], "-i"))
 		i++;
-	}
-	if (!args[i])//always true
+	if (!args[i])
+		mirror = cpy_list(env, &env_node);
+	else
+		mirror = NULL;
+	mirror = update_env(args, mirror, &i);
+	if (!args[i])
 		printenv(mirror);
 	else
 	{
@@ -69,4 +55,3 @@ void	ft_env(char **args, t_list *env)
 	}
 	ft_dellist(&mirror);
 }
-
