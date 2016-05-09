@@ -6,13 +6,13 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 14:07:18 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/09 13:34:12 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:09:31 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-t_list	*update_env(char **args, t_list *aim, int *i)
+void	update_env(char **args, t_list **aim, int *i)
 {
 	int		ret;
 
@@ -22,15 +22,18 @@ t_list	*update_env(char **args, t_list *aim, int *i)
 			|| !ft_strcmp("-i", args[*i])))
 	{
 		if (!ft_strcmp("-u", args[*i]) || !ft_strcmp("--unset", args[*i]))
-			ft_unset(args[++(*i)], aim);
+			ft_unset(args[++(*i)], *aim);
 		if ((ret = ft_get_char(args[*i], '=')) != -1)
 		{
 			args[*i][ret] = '\0';
-			ft_set(args[*i], args[*i] + ret + 1, 1, aim);
+			if (!(*aim))
+				new_in_list(ft_ptrf("%s=%s", args[*i],
+							args[*i] + ret + 1), aim, &env_node);
+			else
+			ft_set(args[*i], args[*i] + ret + 1, 1, *aim);
 		}
 		(*i)++;
 	}
-	return (aim);
 }
 
 void	ft_env(char **args, t_list *env)
@@ -45,7 +48,7 @@ void	ft_env(char **args, t_list *env)
 		mirror = cpy_list(env, &env_node);
 	else
 		mirror = NULL;
-	mirror = update_env(args, mirror, &i);
+	update_env(args, &mirror, &i);
 	if (!args[i])
 		printenv(mirror);
 	else
