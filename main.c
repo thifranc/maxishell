@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:22:14 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/09 13:12:00 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:32:14 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	get_home(char **tab, t_list *aim)
 	char	*tmp;
 
 	if (!tab[0])
-	{
-		ft_putstr("Your command must contain alphanumeric characters.\n");
-		return ;
-	}
+		return (ft_putstr("Your command must contain alphanumeric characters.\n"));
 	i = 1;
 	while (tab[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 11:21:05 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 13:25:32 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:31:47 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	error(char *cmd, int flag)
 		if (flag == 6)
 			ft_putstr(ft_ptrf("Execve of %s failed : no exec rights\n", cmd));
 		if (flag == 7)
-			ft_putstr(ft_ptrf("usage: unsetenv [var_name]\nVar=%s\n", cmd));
+			ft_putstr(ft_ptrf("usage: unsetenv [var_name]\n", cmd));
 	}
 }
 
@@ -107,10 +107,7 @@ void	route_me(char **args, t_list *aim)
 
 	i = 0;
 	if (!args[0])
-	{
-		ft_putstr("no command entered\n");
-		return ;
-	}
+		return (ft_putstr("No command entered\n"));
 	while (builtin[i] && ft_strcmp(builtin[i], args[0]))
 		i++;
 	if (builtin[i])

@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:15:20 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/09 14:08:51 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:27:06 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_cd(char **args, t_list *env)
 	else
 		goal = args[0];
 	if (access(goal, F_OK) == -1)
-		ft_putstr("File does not exist\n");
+		ft_putstr("Invalid path\n");
 	else if (access(goal, R_OK) == -1)
 		ft_putstr("Permission denied\n");
 	if (access(goal, F_OK) == -1 || access(goal, X_OK) == -1)
@@ -79,7 +79,7 @@ void	ft_set(char *name, char *value, int crash, t_list *aim)
 		node->value = ft_strdup(value);
 	}
 	else
-		ft_putendl("var already exists. Use option crash in need");
+		ft_putendl("Var already exists. Use option crash in need");
 	if (!ft_strcmp(name, "PATH"))
 		g_bin = list_binaries();
 }

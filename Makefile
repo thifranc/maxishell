@@ -6,7 +6,7 @@
 #    By: thifranc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 19:24:34 by thifranc          #+#    #+#              #
-#    Updated: 2016/05/07 14:30:02 by thifranc         ###   ########.fr        #
+#    Updated: 2016/05/09 14:13:04 by thifranc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 INC = all.h
 
 SRCS = list main ft_wrd_match make_lists ft_env\
-	   ptr_func route_me lib lib2 builtin debug
+	   ptr_func route_me lib lib2 builtin
 
 SRCS:= $(addsuffix .c, $(SRCS))
 OBJ = $(SRCS:%.c=%.o)

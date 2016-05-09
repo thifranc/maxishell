@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 14:07:18 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/09 14:09:31 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:19:23 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	update_env(char **args, t_list **aim, int *i)
 				new_in_list(ft_ptrf("%s=%s", args[*i],
 							args[*i] + ret + 1), aim, &env_node);
 			else
-			ft_set(args[*i], args[*i] + ret + 1, 1, *aim);
+				ft_set(args[*i], args[*i] + ret + 1, 1, *aim);
 		}
 		(*i)++;
 	}
