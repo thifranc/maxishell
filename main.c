@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:22:14 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 11:53:54 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 13:12:00 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	get_home(char **tab, t_list *aim)
 		{
 			tmp = ft_strdup(tab[i]);
 			free(tab[i]);
-			tab[i] = ft_ptrf("%s/%s", ft_getenv("HOME", 0, aim), tmp + 2);
+			if (tab[i][1])
+				tab[i] = ft_ptrf("%s/%s", ft_getenv("HOME", 0, aim), tmp + 2);
+			else
+				tab[i] = ft_ptrf("%s", ft_getenv("HOME", 0, aim));
 			free(tmp);
 		}
 		i++;
