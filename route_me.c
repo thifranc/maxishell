@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/01 11:21:05 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/09 14:31:47 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/10 12:40:53 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	route_me(char **args, t_list *aim)
 
 	i = 0;
 	if (!args[0])
-		return (ft_putstr("No command entered\n"));
+		return ;
 	while (builtin[i] && ft_strcmp(builtin[i], args[0]))
 		i++;
 	if (builtin[i])
