@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/30 10:58:40 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/07 14:28:21 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/09 14:36:42 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # include <sys/syslimits.h>
 # include <sys/stat.h>
 # include "libft/libft.h"
-
-# define U_OPT 4
-# define I_OPT 2
-# define H_OPT 1
 
 typedef struct		s_list
 {
