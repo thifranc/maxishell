@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 14:07:18 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/09 14:19:23 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/12 14:40:51 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	update_env(char **args, t_list **aim, int *i)
 		|| !ft_strcmp("--unset", args[*i]) || ft_get_char(args[*i], '=') != -1
 			|| !ft_strcmp("-i", args[*i])))
 	{
-		if (!ft_strcmp("-u", args[*i]) || !ft_strcmp("--unset", args[*i]))
+		if (args[*i + 1] && (!ft_strcmp("-u", args[*i]) || !ft_strcmp("--unset", args[*i])))
 			ft_unset(args[++(*i)], *aim);
 		if ((ret = ft_get_char(args[*i], '=')) != -1)
 		{
