@@ -6,7 +6,7 @@
 /*   By: thifranc <thifranc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/06 14:22:14 by thifranc          #+#    #+#             */
-/*   Updated: 2016/05/10 12:43:20 by thifranc         ###   ########.fr       */
+/*   Updated: 2016/05/12 10:06:42 by thifranc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	do_cmd(t_list *aim)
 	char	*epur;
 	int		i;
 
-	i = 0;
 	while (g_cmd_list)
 	{
 		epur = g_cmd_list->name;
+		i = 0;
 		while (epur[i])
 		{
 			if (epur[i] == '"' || epur[i] == '\t')
